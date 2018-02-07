@@ -1,39 +1,47 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import Header from './components/header';
-import Todoinput from './components/todoinput'
+import TodoInput from './components/todoinput';
+// import TodoItem from './components/todoItem';
 
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       todos: [
-      {id 0,text:"make dinner"},
-      {id 1,text :"Fold the laundry."},
-      {id 2, text : "Learn reat"}
-    ],
-    nextId: 3
-  };
+        {id: 0, text: "Make dinner tonight!"},
+        {id: 1, text: "Fold the laundry."},
+        {id: 2, text: "Learn to make a React app!"}
+      ],
+      nextId: 3
+    };
 
-  this.addTodo = this.addTodo.bind(this);
-  this.removeTodo = this.removeTodo.bind(this);
-
-  addTodo(todoText) {
-    console.log("Todo added", todotext);
+    this.addTodo = this.addTodo.bind(this);
+    this.removeTodo = this.removeTodo.bind(this);
   }
 
-  removeTodo(id){
-    console.log("1000:",todo);
+  addTodo(todoText) {
+    let todos = this.state.todos.slice();
+    todos.push({id: this.state.nextId, text: todoText});
+    this.setState({
+      todos: todos,
+      nextId: ++this.state.nextId
+    });
+  }
+
+  removeTodo(id) {
+    this.setState({
+        todos: this.state.todos.filter((todo, index) => todo.id !== id)
+      });
   }
 
   render() {
     return (
       <div className="App">
-        <div className="todowrapper">
+        <div className="todo-wrapper">
           <Header />
-          <Todoinput todoText="addTodo(this.addTodo)" />
+          <TodoInput todoText="" addTodo={this.addTodo} />
+          
         </div>
       </div>
     );
