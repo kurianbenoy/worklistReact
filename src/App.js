@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/header';
 import TodoInput from './components/todoinput';
-// import TodoItem from './components/todoItem';
+import TodoItem from './components/todoitem';
 
 class App extends Component {
   constructor(props) {
@@ -41,7 +41,13 @@ class App extends Component {
         <div className="todo-wrapper">
           <Header />
           <TodoInput todoText="" addTodo={this.addTodo} />
-          
+          <ul>
+              {
+                this.state.todos.map((todo) => {
+                  return <TodoItem todo={todo} key={todo.id} id={todo.id} removeTodo={this.removeTodo}/>
+                })
+              }
+            </ul>
         </div>
       </div>
     );
